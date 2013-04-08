@@ -7,5 +7,3 @@ def insertion_sort_asc(list):
 			list[i + 1] = list[i]
 			i = i - 1
 		list[i + 1] = key
-
-

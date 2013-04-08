@@ -8,4 +8,3 @@ def insertion_sort_desc(list):
 			list[i+1] = list[i]
 			i = i - 1
 		list[i+1] = key
-		
