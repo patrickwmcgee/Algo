@@ -4,7 +4,8 @@ from heapq import *
 def prim(graph, start_node, end_node):
 	minQueue = []
 	mst = []
-	connected = set({'A'})
+	connected = set({start_node})
+	total_distance = 0
 	#begin put all start_nodes edges into the queue
 	for dest, value in graph[start_node].items():
 		heappush(minQueue,(value,start_node,dest))
@@ -12,15 +13,17 @@ def prim(graph, start_node, end_node):
 	# while the number of visited nodes is less than the number of total nodes
 	while(len(connected) < len(graph.keys())):
 		lowest = heappop(minQueue) # get the lowest item in the priority queue
+		dist = lowest[0]
 		vert_from = lowest[1]
 		vert_to = lowest[2]
 		if vert_to not in connected:
 			connected.add(vert_to)	# add the visited item to the list
-			mst.append((vert_from,vert_to)) # append the step to the mst list
+			mst.append((vert_from,vert_to,dist)) # append the step to the mst list
+			total_distance += dist
 			for dest,value in graph[vert_to].items():
 				heappush(minQueue,(value,vert_to,dest)) # push the edges of the item we popped onto the queue
 
-	return mst
+	return mst, total_distance
 
 if __name__ == '__main__':
 	# Graph containing all of the vert's and edges
@@ -38,4 +41,5 @@ if __name__ == '__main__':
 	"K": {'G': 6, 'H': 7, 'I': 8},
 	"L": {'K': 8, 'I': 5, 'J': 9}
 	}
-	prim(graph,'A','L')
+	mst = prim(graph,'A','L')
+	print(mst)
