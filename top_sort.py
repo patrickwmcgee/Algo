@@ -20,53 +20,28 @@ def dfs(graph,start_vert):
 				stack.append(v)
 	return explored_path
 
-#Using the Wikipedia verison of topological sorting
 def top_sort(graph):
 	sorted_list = []
-	# the list of unmarked nodes are the verts / keys in the graph
-	unmarked_nodes = list(graph.keys())
-	discovered = []
-	
-	def visit(v):
-		if v in discovered:
-			print("NOT A DAG")
-			return
-		else:
-			#mark the node as discovered
-			discovered.append(v)
-			# remove the node from the unmarked list
-			unmarked_nodes.remove(v)
-			for e in graph[v]:
-				visit(e)
-			#discovered.remove(v)
-			sorted_list.insert(0,v)
-
-	#Loop while there are unmarked nodes
-	while (unmarked_nodes != []):
-		visit(unmarked_nodes[0])
-	
-	return sorted_list
-def top_sort_new(graph):
-	sorted_list = []
-	queue = []
-	next = 0
+	stack = []
 
 	# create indegree list
 	indegree = calc_indegree(graph)
-	# go through indegree list and take the ones that have an indegree of 0 and put them onto the list / stack
+
+	# go through indegree list and take the ones that have an indegree of 0 and put them onto the stack
 	for key,val in indegree.items():
 		if val == 0:
-			queue.append(key)
+			stack.append(key)
 			sorted_list.append(key)
 
-	while(queue != []):
-		# Get item out of queue/stack
-		popped = queue.pop()
-		next += 1
+	while(stack != []):
+		# Get item out of stack
+		popped = stack.pop()
+
 		for v in graph[popped]:
 			indegree[v] -= 1
+			# if the indegree is 0 add it to the stack to process and then add it to the final path
 			if indegree[v] == 0:
-				queue.append(v)
+				stack.append(v)
 				sorted_list.append(v)
 
 
@@ -102,13 +77,5 @@ if __name__ == '__main__':
 	"F": ["D", "B", "E"],
 	"G": ["C","A"]
 	}
-
-	# print(graph)
-	# print(dfs(graph, "F"))
-	# # print(dfs(graph, "A"))
-	# # print(dfs(cyclic_graph, "F"))
-	# print(top_sort(graph))
-	# print(top_sort(cyclic_graph
-	# print(calc_indegree(graph))
-	print(top_sort_new(graph))
-	print(top_sort_new(cyclic_graph))
+	print(top_sort(graph))
+	print(top_sort(cyclic_graph))
