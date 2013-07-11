@@ -55,7 +55,7 @@ def calc_indegree(graph):
 		indegree[v] = 0
 	for v in graph:
 		for e in graph[v]:
-				indegree[e] += 1
+			indegree[e] += 1
 	return indegree
 
 if __name__ == '__main__':
