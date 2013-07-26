@@ -1,6 +1,6 @@
 #quickhull pseudo
 def quickhull(set_of_points):
-	# the point of this algorithim is to find the convex hull of a given set of set_of_points
+	# the point of this algorithm is to find the convex hull of a given set of set_of_points
 	convex_hull = set{} # set of convex points making up the hull
 	min_x,max_x = find_min_and_max_x
 

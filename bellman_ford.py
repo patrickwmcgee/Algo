@@ -9,8 +9,8 @@ def BellmanFord(graph, source):
 	distance[source] = 0
 
 	for k in range(len(graph)-1):    #note n-1 iterations every time
-		for edge in graph: # in the psuedo code edge would be i
-			for adj in graph[edge]: # in the psuedo code adj would be j
+		for edge in graph: # in the pseudo code edge would be i
+			for adj in graph[edge]: # in the pseudo code adj would be j
 				if (distance[adj] > graph[edge][adj] + distance[edge]):
 					distance[adj] = graph[edge][adj] + distance[edge]
 					pred[adj] = edge
